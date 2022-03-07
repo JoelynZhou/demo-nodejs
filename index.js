@@ -1,12 +1,29 @@
-console.log(Date);
-console.log(Math);
+// console.log(process.argv);
 
-console.log(setTimeout);
-console.log(setInterval);
-// console.log(requestAnimationFrame); // is not defined 原因：不是处在浏览器环境，作为弥补，nodejs 提供了 setImmediate 函数
-console.log(setImmediate);
+const playerAction = process.argv[process.argv.length - 1];
+let computerAction;
+console.log("playerAction:", playerAction);
 
-console.log(__filename); //当前运行的脚本所在的位置
-console.log(__dirname); //当前运行的脚本所在的目录位置
+const random = Math.random() * 3;
+if (random < 1) {
+	computerAction = "rock";
+} else if (random > 2) {
+	computerAction = "scissor";
+} else {
+	computerAction = "paper";
+}
+console.log("computerAction:", computerAction);
 
-console.log(process); //运行 nodejs 的进程信息
+if (computerAction === playerAction) {
+	console.log("平局");
+} else if (
+	(computerAction === "rock" && playerAction === "paper") ||
+	(computerAction === "scissor" && playerAction === "rock") ||
+	(computerAction === "paper" && playerAction === "scissor")
+) {
+	console.log("你赢了");
+} else {
+	console.log("你输了");
+}
+
+// test input: node index.js rock
